@@ -12,7 +12,7 @@
                         {{trend.overview}}
                     </v-card-subtitle>
                     <v-card-actions>
-                        <v-btn @click="$emit('someEvent')">Voir la suite</v-btn>
+                        <movie-detail v-if="trend.id != 0" :movie-id="trend.id"></movie-detail>
                     </v-card-actions>
                 </v-card>
             </v-col>
@@ -21,31 +21,33 @@
     
 </template>
 <script>
+import MovieDetail from './MovieDetail.vue';
+
 const axios = require('axios');
 const apikey = require('../config.json')
 
 export default {
     name: 'MoviesList',
-    data(){
+    data() {
         return {
-            trends : []
-        }
+            trends: []
+        };
     },
     methods: {
         getTrends() {
-            axios.get('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=1&sort_by=popularity.desc&api', {
-                headers : 'Authorization: Bearer ' + apikey.api_key
+            axios.get('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=fr-FR&page=1&sort_by=popularity.desc', {
+                headers: 'Authorization: Bearer ' + apikey.api_key
             })
-            .then((response) => {
+                .then((response) => {
                 // handle success
-                this.trends = response.data.results
-            })
+                this.trends = response.data.results;
+            });
         }
     },
     mounted() {
         this.getTrends();
     },
-    
+    components: { MovieDetail }
 }
 
 </script>

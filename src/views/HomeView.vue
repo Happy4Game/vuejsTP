@@ -13,7 +13,7 @@ import MovieDetail from '@/components/MovieDetail.vue';
 
 export default {
     name: 'HomeView',
-    components: { MovieList, MoviePagination, MovieSearch }
+    components: { MovieList, MoviePagination, MovieSearch, MovieDetail }
 }
 
 </script>
