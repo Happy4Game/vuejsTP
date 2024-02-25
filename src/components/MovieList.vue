@@ -28,6 +28,11 @@ const apikey = require('../config.json')
 
 export default {
     name: 'MoviesList',
+    props:{
+        movieName: {
+            type: String
+        }
+    },
     data() {
         return {
             trends: []
